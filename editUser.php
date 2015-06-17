@@ -12,7 +12,7 @@ require_once "crudUser.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agregar - Usuario</title>
+    <title>Editar - Usuario</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -192,46 +192,46 @@ require_once "crudUser.php";
                         <form role="form" id="frmUser" method="post" action="crudUser.php?action=update">
                             <div class="form-group">
                                 <label>Nombres</label>
-                                <input id="nombres" name="nombres" class="form-control" value="<?php echo $arrUser['Nombres']; ?>" placeholder="Nombres Usuario">
+                                <input id="nombres" name="nombres" class="form-control" value="<?php echo $arrUser['nombres']; ?>" placeholder="Nombres Usuario">
                                 <p class="help-block">Nombres completos del usuario.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Apellidos</label>
-                                <input id="apellidos" name="apellidos" class="form-control" value="<?php echo $arrUser['Apellidos']; ?>" placeholder="Apellidos Usuario">
+                                <input id="apellidos" name="apellidos" class="form-control" value="<?php echo $arrUser['apellidos']; ?>" placeholder="Apellidos Usuario">
                                 <p class="help-block">Apellidos completos del usuario.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Direccion</label>
-                                <input id="direccion" name="direccion" class="form-control" value="<?php echo $arrUser['Direccion']; ?>" placeholder="Direccion Usuario">
+                                <input id="direccion" name="direccion" class="form-control" value="<?php echo $arrUser['direccion']; ?>" placeholder="Direccion Usuario">
                                 <p class="help-block">Direccion donde vive el usuario.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Seleccionar Mi Foto</label>
-                                <input type="file" id="foto" name="foto" class="form-control">
+                                <input type="file" id="foto" name="foto" class="form-control" value="<?php echo $arrUser['foto']; ?>">
                                 <p class="help-block">Foto que desee el usuario.</p>
                             </div>
 
                              <div class="form-group">
                                 <label>Mi Email</label>
-                                <input id="email" name="email" class="form-control" placeholder="Ej. victorrodriguez17@hotmail.com" type="email" required>
+                                <input id="email" name="email" class="form-control" placeholder="Ej. victorrodriguez17@hotmail.com" type="email" required value="<?php echo $arrUser['email']; ?>">
                                 <p class="help-block">Correo electronico del usuario.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Usuario</label>
-                                <input id="usuario" name="usuario" class="form-control" placeholder="Ej. victor12345" required>
+                                <input id="usuario" name="usuario" class="form-control" placeholder="Ej. victor12345" required value="<?php echo $arrUser['usuario']; ?>">
                                 <p class="help-block">Usuario para ingresar al sistema.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Contraseña</label>
-                                <input id="contrasena" name="contrasena" class="form-control" placeholder="Ej. 54321" required>
+                                <input id="contrasena" name="contrasena" class="form-control" placeholder="Ej. 54321" required value="<?php echo $arrUser['contrasena']; ?>">
                                 <p class="help-block">Clave de usuario para ingresar al sistema.</p>
                             </div>
-                            <button type="submit" class="btn btn-default">Enviar</button>
+                            <button type="submit" class="btn btn-default">Guardar</button>
                             <button type="reset" class="btn btn-default">Limpiar</button>
 
                         </form>

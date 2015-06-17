@@ -1,3 +1,6 @@
+<?php
+require_once "crudPost.php"; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> Ingreso - Usuario</title>
+    <title>Editar - Posts</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Bienvenido</a>
+                <a class="navbar-brand" href="index.html">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -56,12 +59,12 @@
                                     <span class="pull-left">
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
-                                    <!--<div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>Victor Rodriguez</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>-->
+                                    </div>
                                 </div>
                             </a>
                         </li>
@@ -109,13 +112,26 @@
                         <li>
                             <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
                         </li>
-                       
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
                         <li class="divider"></li>
-                        
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Victor Rodriguez <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -140,97 +156,76 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
+            <div class="container-fluid"> 
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                           Ingreso <small>Usuarios Registrados</small>
+                            Editar Usuario
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Usuarios</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Posts</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> Agregar
+                                <i class="fa fa-edit"></i> Editar
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 
+                <?php if(empty($_GET['id'])){ ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> No se encontro un post al que aplicar esta accion.
+                    </div>
+                <?php }else{ ?>
+
+                <?php
+                    $_SESSION['idposts'] = $_GET['id'];
+                    $arrPost = getPost($_SESSION['idposts']);
+                    echo $arrPost;
+                ?>
                 <div class="row">
                     <div class="col-lg-8">
 
-
-                        <form  id="frmUser" method="post" action="login.php">
+                        <form role="form" id="frmPost" method="post" action="crudPost.php?action=update">
                             <div class="form-group">
-                                <label>Usuario</label>
-                                <input id="usuario" name="usuario" class="form-control" placeholder="Ingrese su Usuario" required="required">
+                                <label>Titulo</label>
+                                <input id="titulo" name="titulo" class="form-control" placeholder="Ej. Titulo de post" required value="<?php echo $arrPost['titulo']; ?>">
+                                <p class="help-block">Titulo del post a crear.</p>
                             </div>
 
                             <div class="form-group">
-                                <label>Contraseña</label>
-                                <input id="contrasena" name="contrasena" class="form-control" placeholder="Ingrese su Contraseña" required="required" type="password">
+                                <label>Subtitulo</label>
+                                <input id="subtitulo" name="subtitulo" class="form-control" placeholder="Ej. Subtitulo del post" required value="<?php echo $arrPost['subtitulo']; ?>">
+                                <p class="help-block">Subtitulo del post a crear.</p>
                             </div>
 
-                            <button type="submit" class="btn btn-default">Ingresar</button>
-                           
+                            <div class="form-group">
+                                <label>Descripci&oacute;n</label>
+                                <input id="texto" name="texto" class="form-control" placeholder="Ej. Descripcion" required value="<?php echo $arrPost['texto']; ?>">
+                                <p class="help-block">Descripci&oacute;n del post.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Seleccionar Icono</label>
+                                <input type="file" id="icono" name="icono" class="form-control">
+                                <p class="help-block">Seleccione el icono que desees.</p>
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Guardar</button>
+                            <button type="reset" class="btn btn-default">Limpiar</button>
                             <br><br><br>
-
                         </form>
-                        
 
                     </div>
 
                 </div>
+
+                <?php } ?>
+
+
                 <!-- /.row -->
 
-<div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-pencil-square-o fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>Registro de Usuarios</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <a href="addUser.php" style="color: #5cb85c;"><span class="pull-left">Registrarse</span></a>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-sign-in fa-5x"></i>                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>Validacion de Usuario</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <a href="login.php" ><span class="pull-left">Ingresar</span></a>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
             </div>
             <!-- /.container-fluid -->
 

@@ -18,36 +18,34 @@
 	}
 
 	function crearPost(){
-		$conexion = new PDO('sqlite:blogs.sqlite');
-
-		$utc = date("U");
-		$anio = date("Y");
-		$mes = date("m");
-		$dia = date("d");
-		$hora = date("H");
-		$minuto = date("i");
-		$segundo = date("s");	
-		$titulo = $_POST['titulo'];
-		$subtitulo = $_POST['subtitulo'];
-		$texto = $_POST['texto'];
-		$icono = $_POST['icono'];
+		$params = array(
+		':utc' => date("U"),
+		':anio' => date("Y"),
+		':mes' => date("m"),
+		':dia' => date("d"),
+		':hora' => date("H"),
+		':minuto' => date("i"),
+		':segundo' => date("s"),	
+		':titulo' => $_POST['titulo'],
+		':subtitulo' => $_POST['subtitulo'],
+		':texto' => $_POST['texto'],
+		':icono' => $_POST['icono'],
+		);
 		
-
-		$query = "INSERT INTO posts (utc, anio, mes, dia, hora, minuto, segundo, titulo, subtitulo, texto, icono) VALUES ('".$utc."', '".$anio."','".$mes."','".$dia."', '".$hora."', '".$minuto."', '".$segundo."', '".$titulo."', '".$subtitulo."', '".$texto."', '".$icono."')";
+		//preparo el query a partir del array params
+		$query = "INSERT INTO posts (utc, anio, mes, dia, hora, minuto, segundo, titulo, subtitulo, texto, icono) VALUES (:utc, :anio, :mes, :dia, :hora, :minuto, :segundo, :titulo, :subtitulo, :texto, :icono)";
  
-		$result = $conexion-> exec($query);
+		$result = excuteQuery("blogs","", $query, $params);
 		if ($result > 0){
 			header('Location: menuusuario.html?result=true');
 		}else{
 			header('Location: crearPost.php?result=false');
 		}
-		$conexion = NULL;
 	}
 
 	function verPost (){
-		$conexion = new PDO('sqlite:blogs.sqlite');
 		$query = "SELECT * FROM posts";
-		$result = $conexion-> query($query);
+		$result = newQuery("blogs", "", $query);
 		if ($result != false || $result > 0){
 			foreach ($result as $value) {
 				echo "<tr>";
@@ -61,13 +59,11 @@
 		}else{
 			echo "No se encontraron resultados";
 		}
-		$conexion = NULL;
 	}
 
 	function getPost($id){
-		$conexion = new PDO('sqlite:blogs.sqlite');
-		$query = "SELECT * FROM posts WHERE idposts = '".$id."'";
-		$result = $conexion -> exec($query);
+		$query = "SELECT * FROM posts WHERE = '".$id."'";
+		$result = newQuery("blogs", "", $query);
 		if ($result != false || $result > 0){
 			foreach ($result as $value) {
 				return $value;
@@ -75,31 +71,53 @@
 		}else{
 			return false;
 		}
-		$conexion = NULL;
 	}
 
+
+
 	function updatePost (){
-		$conexion = new PDO('sqlite:blogs.sqlite');
-		$idUser = $_SESSION['idusuarios'];
-		$nombres = $_POST['nombres'];
-		$apellidos = $_POST['apellidos'];
-		$titulo  = $_POST['direccion'];
-		$estado = $_POST['foto'];
-		$usuario = $_SESSION['email'];
-		$contrasena = $_POST['usuario'];
-		$contrasena = $_POST['contrasena'];
 
-		$query = "UPDATE usuarios SET nombres = '".$nombres."', apellidos = '".$apellidos."', direccion = '".$direccion."', foto = '".$foto."', email = '".$email."', usuario = '".$usuario."', co = '".$email."'  WHERE idUsuario = '".$idUser."';";
+		/* Proteccion de Datos */
+		$params = array(
+		':idposts' => $_SESSION['idposts'],
+		':utc' => date("U"),
+		':anio' => date("Y"),
+		':mes' => date("m"),
+		':dia' => date("d"),
+		':hora' => date("H"),
+		':minuto' => date("i"),
+		':segundo' => date("s"),	
+		':titulo' => $_POST['titulo'],
+		':subtitulo' => $_POST['subtitulo'],
+		':texto' => $_POST['texto'],
+		':icono' => $_POST['icono'],
+		);
 
-		$result = excuteQuery("Usuarios", "", $query);
+		/* Preparamos el query apartir del array $params*/
+		$query ='UPDATE usuarios SET
+
+				utc = :utc,
+				anio = :anio,
+				mes = :mes,
+				dia = :dia,
+				hora = :hora,
+				minuto = :minuto,
+				segundo = :segundo,
+				titulo = :titulo,
+				subtitulo = :subtitulo,
+				texto = :texto,
+				icono = :icono
+				 WHERE idposts = :idposts;
+				';
+
+		$result = excuteQuery("blogs", "", $query, $params);
 		if ($result > 0){
-			unset($_SESSION['usuario']);
-			$_SESSION['usuario'] = NULL;
+			unset($_SESSION['idusuarios']);
+			$_SESSION['idusuarios'] = NULL;
 			header('Location: viewUsers.php?result=true');
 		}else{
-			header('Location: addUser.php?result=false');
+			header('Location: editUser.php?result=false');
 		}
-		$conexion = NULL;
 	}
 
 	function deletePost (){

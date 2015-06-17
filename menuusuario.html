@@ -1,3 +1,7 @@
+<?php
+require_once "crudUser.php"; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -215,13 +219,14 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">12</div>
-                                        <div>Registro de Usuarios</div>
+                                        <div>Nombres de Usuario</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="#">
                                 <div class="panel-footer">
-                                    <a href="addUser.php" style="color: #5cb85c;"><span class="pull-left">Registrarse</span></a>
+                                    <a href="" style="color: #5cb85c;"><span class="pull-left"><?php session_start(); 
+                                    echo $nombres = $_SESSION['nombres']; ?></span></a>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
@@ -238,7 +243,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">12</div>
-                                        <div>Registro de Usuarios</div>
+                                        <div>Apellidos de Usuario</div>
                                     </div>
                                 </div>
                             </div>

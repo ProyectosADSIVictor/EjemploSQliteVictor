@@ -17,31 +17,36 @@
 	}
 
 	function crearUsuario(){
-		$conexion = new PDO('sqlite:blogs.sqlite');
-		$nombres = $_POST['nombres'];
-		$apellidos = $_POST['apellidos'];
-		$direccion = $_POST['direccion'];
-		$foto = $_POST['foto'];
-		$email = $_POST['email'];
-		$usuario = $_POST['usuario'];
-		$contrasena = $_POST['contrasena'];
+		/* Proteccion de Datos */
+		$params = array(
+			':nombres' => $_POST['nombres'],
+			':apellidos' => $_POST['apellidos'],
+			':direccion' => $_POST['direccion'],
+			':foto' => $_POST['foto'],
+			':email' => $_POST['email'],
+			':usuario' => $_POST['usuario'],
+			':contrasena' => $_POST['contrasena'],
+		);
 
+		/* Preparamos el query apartir del array $params*/
+		$query = 'INSERT INTO usuarios 
+					(nombres, apellidos, direccion, foto, email, usuario, contrasena) 
+				VALUES 
+					(:nombres,:apellidos,:direccion,:foto,:email,:usuario,:contrasena)';
 
-		$query = "INSERT INTO usuarios (nombres, apellidos, direccion, foto, email, usuario, contrasena ) VALUES ('".$nombres."', '".$apellidos."','".$direccion."','".$foto."', '".$email."', '".$usuario."', '".$contrasena."')";
- 
-		$result = $conexion-> exec($query);
+		/* Ejecutamos el query con los parametros */
+		$result = excuteQuery("blogs","", $query, $params);
 		if ($result > 0){
 			header('Location: formlogin.php?result=true');
 		}else{
 			header('Location: addUser.php?result=false');
 		}
-		$conexion = NULL;
 	}
 
+
 	function verUsuarios (){
-		$conexion = new PDO('sqlite:blogs.sqlite');
 		$query = "SELECT * FROM usuarios";
-		$result = $conexion-> query($query);
+		$result = newQuery("blogs", "", $query);
 		if ($result != false || $result > 0){
 			foreach ($result as $value) {
 				echo "<tr>";
@@ -56,13 +61,11 @@
 		}else{
 			echo "No se encontraron resultados";
 		}
-		$conexion = NULL;
 	}
 
 	function getUser($id){
-		$conexion = new PDO('sqlite:blogs.sqlite');
 		$query = "SELECT * FROM usuarios WHERE idusuarios = '".$id."'";
-		$result = $conexion -> exec($query);
+		$result = newQuery("blogs", "", $query);
 		if ($result != false || $result > 0){
 			foreach ($result as $value) {
 				return $value;
@@ -70,44 +73,61 @@
 		}else{
 			return false;
 		}
-		$conexion = NULL;
 	}
 
 	function updateUser (){
-		$conexion = new PDO('sqlite:blogs.sqlite');
-		$idUser = $_SESSION['idusuarios'];
-		$nombres = $_POST['nombres'];
-		$apellidos = $_POST['apellidos'];
-		$titulo  = $_POST['direccion'];
-		$estado = $_POST['foto'];
-		$usuario = $_SESSION['email'];
-		$contrasena = $_POST['usuario'];
-		$contrasena = $_POST['contrasena'];
 
-		$query = "UPDATE usuarios SET nombres = '".$nombres."', apellidos = '".$apellidos."', direccion = '".$direccion."', foto = '".$foto."', email = '".$email."', usuario = '".$usuario."', co = '".$email."'  WHERE idUsuario = '".$idUser."';";
+		/* Proteccion de Datos */
+		$params = array(
+			':idusuarios' => $_SESSION['idusuarios'],
+			':nombres' => $_POST['nombres'],
+			':apellidos' => $_POST['apellidos'],
+			':direccion' => $_POST['direccion'],
+			':foto' => $_POST['foto'],
+			':email' => $_POST['email'],
+			':usuario' => $_POST['usuario'],
+			':contrasena' => $_POST['contrasena'],
+		);
 
-		$result = excuteQuery("Usuarios", "", $query);
+		/* Preparamos el query apartir del array $params*/
+		$query ='UPDATE usuarios SET
+					nombres = :nombres,
+					apellidos = :apellidos,
+					direccion = :direccion,
+					foto = :telefono,
+					email = :email,
+					usuario = :usuario,
+					contrasena = :contrasena  
+				 WHERE idusuarios = :idusuarios;
+				';
+
+		$result = excuteQuery("blogs", "", $query, $params);
 		if ($result > 0){
-			unset($_SESSION['usuario']);
-			$_SESSION['usuario'] = NULL;
+			unset($_SESSION['idusuarios']);
+			$_SESSION['idusuarios'] = NULL;
 			header('Location: viewUsers.php?result=true');
 		}else{
-			header('Location: addUser.php?result=false');
+			header('Location: editUser.php?result=false');
 		}
-		$conexion = NULL;
 	}
-
 	function deleteUser (){
-		$conexion = new PDO('sqlite:blogs.sqlite');
+
 		$idUser = $_GET['id'];
-		$query = "DELETE FROM usuarios WHERE idusuarios ='".$idUser."';";
-		$result = $conexion-> exec($query);
+
+		/* Proteccion de Datos */
+		$params = array(
+			':id' => $_GET['id'],
+		);
+
+		/* Preparamos el query apartir del array $params*/
+		$query ='DELETE FROM Usuarios
+				 WHERE idusuarios = :id;';
+
+		$result = excuteQuery("blogs", "", $query, $params);
 		if ($result > 0){
 			header('Location: viewUsers.php?result=true');
 		}else{
-			header('Location: addUser.php?result=false');
+			header('Location: viewUser.php?result=false');
 		}
-		$conexion = NULL;
 	}
-
 ?>

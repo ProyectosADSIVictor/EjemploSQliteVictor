@@ -175,8 +175,8 @@
                                     <th data-column-id="telefono" data-width="100px">Direccion</th>
                                     <th data-column-id="estado" data-width="100px">Foto</th>
                                     <th data-column-id="estado" data-width="100px">Email</th>
-                                    <!--<th data-column-id="actions" align="center" data-formatter="actions" data-width="100px">Acciones</th>
-                                --></tr>
+                                    <th data-column-id="actions" align="center" data-formatter="actions" data-width="100px">Acciones</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php echo verUsuarios(); ?>

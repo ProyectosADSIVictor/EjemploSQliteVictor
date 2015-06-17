@@ -162,7 +162,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-users fa-fw"></i> Usuarios</h3>
+                                <h3 class="panel-title"><i class="fa fa-spotify"></i></i> Posts</h3>
                             </div>
                             <div class="panel-body">
                                 
@@ -175,7 +175,7 @@
                                     <th data-column-id="descripcion" data-width="100px">Decripcion</th>
                                     <th data-column-id="foto" data-width="100px">Foto</th>
                                    <th data-column-id="actions" align="center" data-formatter="actions" data-width="100px">Acciones</th>
-                                --></tr>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php echo verPost(); ?>
@@ -217,7 +217,7 @@
                 formatters: {
                     "actions": function(column, row)
                     {
-                        return "<a href=\"editUser.php?id="+row.id+"\"><i class='fa fa-pencil fa-fw'></i></a> "+
+                        return "<a href=\"editPost.php?id="+row.id+"\"><i class='fa fa-pencil fa-fw'></i></a> "+
                         " <a href=\"crudPost.php?id="+row.id+"&action=delete\"><i class='fa fa-minus-circle fa-fw'></i></a>";
                     }
                 },
