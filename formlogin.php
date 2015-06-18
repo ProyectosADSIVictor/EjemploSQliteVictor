@@ -134,7 +134,7 @@
                 </li>
             </ul>
 
-             <?php include_once "menu.php"; ?>
+             <?php //include_once "menu.php"; ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -187,7 +187,7 @@
                 </div>
                 <!-- /.row -->
 
-<div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">

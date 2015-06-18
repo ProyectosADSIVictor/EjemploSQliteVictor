@@ -2,28 +2,22 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="viewInstall.php"><i class="fa fa-fw fa-dashboard"></i> Instalar</a>
+                        <a href="crearpost.php"><i class="fa fa-fw fa-dashboard"></i>Crear  posts</a>
                     </li>
                     <li>
-                        <a href="viewUsers.php"><i class="fa fa-fw fa-bar-chart-o"></i> Usuarios</a>
+                        <a href="verpost.php"><i class="fa fa-fw fa-bar-chart-o"></i>Ver mis posts</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="verlogs.php"><i class="fa fa-fw fa-table"></i> Ver todos los logs</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                        <a href="addfavoritos.php"><i class="fa fa-fw fa-edit"></i> Crear favoritos</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="verfavoritos.php"><i class="fa fa-fw fa-desktop"></i> Ver mis favoritos</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
-                    <li class="active">
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="verfavoritos"><i class="fa fa-fw fa-desktop"></i> Ver otros Usuarios</a>
                     </li>
                 </ul>
             </div>

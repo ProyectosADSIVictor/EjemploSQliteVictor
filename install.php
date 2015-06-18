@@ -14,7 +14,8 @@
 			foto Char(40) Not Null,
 			email Char(80) Not Null,
 			usuario Char(40) Not Null,
-			contrasena Char(40) Not Null)"; 
+			contrasena Char(40) Not Null,
+			permisos INT NOT NULL)";
 			//Creacion del query para crear la tabla.
 		    $result = $db->exec($query); //Ejecutamos el query. Se usa exec para todos los casos excepto para los select.
 		    echo ($result === false) ? "<i class='fa fa-times-circle'></i> No se pudo crear la Tabla Usuarios."."<br/>" : "<i class='fa fa-check-square-o'></i> Se creo correctamente la Tabla Usuarios."."<br/>";
@@ -32,7 +33,10 @@
 			titulo Char(120) Not Null,
 			subtitulo Char(120) Not Null,
 			texto Char(4000) Not Null,
-			icono Char(80) Not Null)";
+			icono Char(80) Not Null,
+			usuario Char(40) Not Null,
+			contrasena Char(40) Not Null)";
+			
 			$result = $db->exec($query); //Ejecutamos el query. Se usa exec para todos los casos excepto para los select.
 			echo ($result === false) ? "<i class='fa fa-times-circle'></i> No se pudo crear la Tabla Posts."."<br/>" : "<i class='fa fa-check-square-o'></i> Se creo correctamente la Tabla Posts."."<br/>";
 
@@ -50,22 +54,26 @@
 			ip Char(50),
 			navegador Char(40),
 			usuario Char(40),
-			operacion Char(80))";
+			contrasena Char(80))";
 
 			$result = $db->exec($query); //Ejecutamos el query. Se usa exec para todos los casos excepto para los select.
 			echo ($result === false) ? "<i class='fa fa-times-circle'></i> No se pudo crear la Tabla Logs."."<br/>" : "<i class='fa fa-check-square-o'></i> Se creo correctamente la Tabla Logs."."<br/>";
 
 
 			//Creacion de la tabla logs
-			$query = "CREATE TABLE `configusuario` (
-			`idconfigusuario`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-			usuario Char(40)Not Null,
-			piel Char(100)Not Null,
-			respuestas Char(40))";
+			$query = "CREATE TABLE `favoritos` (
+			`idfavoritos`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			titulo Char(40) Not Null,
+			direccion Char(100)Not Null,
+			categoria Char(40),
+			comentario Char(200),
+			valoracion Int,
+			usuario Char(40) Not Null,
+			contrasena Char(40) Not Null)";
 
 
 			$result = $db->exec($query); //Ejecutamos el query. Se usa exec para todos los casos excepto para los select.
-			echo ($result === false) ? "<i class='fa fa-times-circle'></i> No se pudo crear la Tabla configusuario."."<br/>" : "<i class='fa fa-check-square-o'></i> Se creo correctamente la Tabla configusuario."."<br/>";
+			echo ($result === false) ? "<i class='fa fa-times-circle'></i> No se pudo crear la Tabla favoritos."."<br/>" : "<i class='fa fa-check-square-o'></i> Se creo correctamente la Tabla favoritos."."<br/>";
 
 
 		    $db = NULL; //Cerramos la conexion a la Base de datos.

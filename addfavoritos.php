@@ -1,9 +1,7 @@
 <?php
-require_once "crudPost.php"; 
 require_once "crudUser.php"; 
-
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +13,10 @@ require_once "crudUser.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Posts</title>
+    <title>Agregar - Favoritos</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/bootgrid-1.2.0/jquery.bootgrid.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
@@ -50,7 +47,7 @@ require_once "crudUser.php";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" >Administraci&oacute;n de Usuarios</a>
+                
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -68,7 +65,7 @@ require_once "crudUser.php";
                                             $dataUser = getUser($_SESSION["id"]);
                                             echo $dataUser['nombres']; ?></strong>
                                         </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Ayer a las 4:32 PM</p>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
@@ -85,14 +82,31 @@ require_once "crudUser.php";
                                             $dataUser = getUser($_SESSION["id"]);
                                             echo $dataUser['nombres']; ?></strong>
                                         </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Ayer a las 4:32 PM</p>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong><?php  
+                                            $dataUser = getUser($_SESSION["id"]);
+                                            echo $dataUser['nombres']; ?></strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li class="message-footer">
-                            <a href="#">Leer Todos Los Mensajes</a>
+                            <a href="#">Read All New Messages</a>
                         </li>
                     </ul>
                 </li>
@@ -100,26 +114,26 @@ require_once "crudUser.php";
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
-                            <a href="#">Alert Nueva<span class="label label-default">Alert Default</span></a>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="#">Alert Nueva <span class="label label-primary">Alert Primary</span></a>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="#">Alert Nueva <span class="label label-success">Alert Success</span></a>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="#">Alert Nueva <span class="label label-info">Alert Info</span></a>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="#">Alert Nueva <span class="label label-warning">Alert Warning</span></a>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
                         </li>
                         <li>
-                            <a href="#">Alert Nueva <span class="label label-danger">Alert Danger</span></a>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">Ver Todas</a>
+                            <a href="#">View All</a>
                         </li>
                     </ul>
                 </li>
@@ -129,24 +143,23 @@ require_once "crudUser.php";
                                             echo $dataUser['nombres']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Config</a>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
             </ul>
 
-            <?php include_once "menu.php"; ?>
-
+             <?php include_once "menu.php"; ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -158,11 +171,14 @@ require_once "crudUser.php";
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Administraci&oacute;n <small>de mis posts</small>
+                            Agregar Favorito
                         </h1>
                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Favoritos</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Principal
+                                <i class="fa fa-edit"></i> Agregar
                             </li>
                         </ol>
                     </div>
@@ -170,37 +186,60 @@ require_once "crudUser.php";
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-spotify"></i></i> Posts</h3>
+                    <div class="col-lg-8">
+
+                        <form role="form" id="frmUser" method="post" action="crudFavoritos.php?action=crear">
+                            <div class="form-group">
+                                <label>Titulo</label>
+                                <input id="titulo" name="titulo" class="form-control" placeholder="Ej. Facebook" required>
+                                <p class="help-block">Titulo del favorito</p>
                             </div>
-                            <div class="panel-body">
+
+                            <div class="form-group">
+                                <label>Direccion</label>
+                                <input  id="direccion" name="direccion" class="form-control" placeholder="Ej. http://www.facebook.com" required>
                                 
-                        <table id="grid-basic" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true">
-                            <thead>
-                                <tr>
-                                    <th data-column-id="id" data-align="left" data-width="40px" data-type="numeric" data-order="asc">ID</th>
-                                    <th data-column-id="titulo" data-width="25%" data-align="left" data-header-align="center">Titulo</th>
-                                    <th data-column-id="subtitulo" data-width="25%">Subtitulo</th>
-                                    <th data-column-id="descripcion" data-width="100px">Decripcion</th>
-                                    <th data-column-id="foto" data-width="100px">Foto</th>
-                                   <th data-column-id="actions" align="center" data-formatter="actions" data-width="100px">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php echo verPost(); ?>
-                            </tbody>
-                        </table>
-
+                                <p class="help-block">URL del favorito</p>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="categoria" name="categoria" class="form-control">
+                                    <option value="Tecnologia">Tecnologia</option>
+                                    <option value="Salud">Salud</option>
+                                    <option value="Hobby">Hobby</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Trabajo">Trabajo</option>
+                                </select>
+                            </div>
+
+                             <div class="form-group">
+                                <label>Comentario</label>
+                                <input id="comentario" name="comentario" class="form-control" placeholder="Ej. Red social mas usada" required>
+                                <p class="help-block">Descripcion del favorito</p>
+                            </div>                            
+
+                            <div class="form-group">
+                                <label>Valoracion</label>
+                                <select id="valoracion" name="valoracion" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-default">Agregar</button>
+                            <button type="reset" class="btn btn-default">Limpiar</button>
+                            <br><br><br>
+
+                        </form>
+
                     </div>
+
                 </div>
-                <a type="button" href="crearpost.php" class="btn btn-primary pull-right"><i class="fa fa-plus fa-fw"></i> Agregar</a>
-
-                
-
                 <!-- /.row -->
 
             </div>
@@ -217,28 +256,6 @@ require_once "crudUser.php";
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootgrid-1.2.0/jquery.bootgrid.js"></script>
-    <script src="js/bootgrid-1.2.0/jquery.bootgrid.fa.js"></script>
-
-    <script>
-
-        function init()
-        {
-            $("#grid-basic").bootgrid({
-                formatters: {
-                    "actions": function(column, row)
-                    {
-                        return "<a href=\"editPost.php?id="+row.id+"\"><i class='fa fa-pencil fa-fw'></i></a> "+
-                        " <a href=\"crudPost.php?id="+row.id+"&action=delete\"><i class='fa fa-minus-circle fa-fw'></i></a>";
-                    }
-                },
-                rowCount: [-1, 25, 50, 75]
-            });
-        }
-        
-        init();
-
-    </script>
 
 </body>
 

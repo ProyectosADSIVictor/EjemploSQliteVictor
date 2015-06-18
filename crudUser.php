@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	
 	require_once("install.php");
 	if (!empty($_REQUEST['action'])){
@@ -27,12 +26,12 @@
 			':usuario' => $_POST['usuario'],
 			':contrasena' => $_POST['contrasena'],
 		);
-
+	
 		/* Preparamos el query apartir del array $params*/
 		$query = 'INSERT INTO usuarios 
-					(nombres, apellidos, direccion, foto, email, usuario, contrasena) 
+					(nombres, apellidos, direccion, foto, email, usuario, contrasena, permisos) 
 				VALUES 
-					(:nombres,:apellidos,:direccion,:foto,:email,:usuario,:contrasena)';
+					(:nombres,:apellidos,:direccion,:foto,:email,:usuario,:contrasena, 2)';
 
 		/* Ejecutamos el query con los parametros */
 		$result = excuteQuery("blogs","", $query, $params);
@@ -94,7 +93,7 @@
 					nombres = :nombres,
 					apellidos = :apellidos,
 					direccion = :direccion,
-					foto = :telefono,
+					foto = :foto,
 					email = :email,
 					usuario = :usuario,
 					contrasena = :contrasena  

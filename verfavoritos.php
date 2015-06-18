@@ -1,5 +1,5 @@
-<?php require_once "crudUser.php"; 
-session_start();
+<?php require_once "crudFavoritos.php"; 
+require_once "crudUser.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Usuarios</title>
+    <title>Admin - Favoritos</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@ session_start();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" >Administraci&oacute;n de Usuarios</a>
+                <a class="navbar-brand" >Administraci&oacute;n de Favoritos</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -61,7 +61,9 @@ session_start();
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>Victor Rodriguez</strong>
+                                        <h5 class="media-heading"><strong><?php  
+                                            $dataUser = getUser($_SESSION["id"]);
+                                            echo $dataUser['nombres']; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Ayer a las 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -76,7 +78,9 @@ session_start();
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>Victor Rodriguez</strong>
+                                        <h5 class="media-heading"><strong><?php  
+                                            $dataUser = getUser($_SESSION["id"]);
+                                            echo $dataUser['nombres']; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Ayer a las 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -118,8 +122,8 @@ session_start();
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php  
-                                    $dataUser = getUser($_SESSION["id"]);
-                                    echo $dataUser['nombres']; ?> <b class="caret"></b></a>
+                                            $dataUser = getUser($_SESSION["id"]);
+                                            echo $dataUser['nombres']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -151,7 +155,7 @@ session_start();
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Administraci&oacute;n <small>de Usuarios</small>
+                            Administraci&oacute;n <small>de Favoritos</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -162,7 +166,7 @@ session_start();
                 </div>
                 <!-- /.row -->
                 <?php 
-                $codigo = $_SESSION['permisos'];
+                
                 echo "Tu Usuario es: ".$_SESSION['usuario']."";
                 echo "<br>Tu Clave es: ".$_SESSION['contrasena']."<br><br>";
                 ?>
@@ -178,11 +182,11 @@ session_start();
                             <thead>
                                 <tr>
                                     <th data-column-id="id" data-align="left" data-width="40px" data-type="numeric" data-order="asc">ID</th>
-                                    <th data-column-id="nombres" data-width="25%" data-align="left" data-header-align="center">Nombres</th>
-                                    <th data-column-id="apellidos" data-width="25%">Apellidos</th>
-                                    <th data-column-id="direccion" data-width="100px">Direccion</th>
-                                    <th data-column-id="foto" data-width="100px">Foto</th>
-                                    <th data-column-id="email" data-width="100px">Email</th>
+                                    <th data-column-id="titulo" data-width="25%" data-align="left" data-header-align="center">Titulo</th>
+                                    <th data-column-id="direccion" data-width="25%">Direccion</th>
+                                    <th data-column-id="categoria" data-width="100px">Categoria</th>
+                                    <th data-column-id="comentario" data-width="100px">Comentario</th>
+                                    <th data-column-id="valoracion" data-width="100px">Valoracion</th>
                                     <th data-column-id="actions" align="center" data-formatter="actions" data-width="100px">Acciones</th>
                                 </tr>
                             </thead>
@@ -190,7 +194,7 @@ session_start();
                             <?php 
                         //$codigo = $_SESSION['permisos'];
                         //if($codigo == 1){
-                            echo verUsuarios(); 
+                            echo verFavoritos(); 
                         //}else{
                         //}
                             ?>
@@ -201,7 +205,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <a type="button" href="addUser.php" class="btn btn-primary pull-right"><i class="fa fa-plus fa-fw"></i> Agregar</a>
+                <a type="button" href="addfavoritos.php" class="btn btn-primary pull-right"><i class="fa fa-plus fa-fw"></i> Agregar</a>
 
                 
 
@@ -232,8 +236,8 @@ session_start();
                 formatters: {
                     "actions": function(column, row)
                     {
-                        return "<a href=\"editUser.php?id="+row.id+"\"><i class='fa fa-pencil fa-fw'></i></a> "+
-                        " <a href=\"crudUser.php?id="+row.id+"&action=delete\"><i class='fa fa-minus-circle fa-fw'></i></a>";
+                        return "<a href=\"editfavoritos.php?id="+row.id+"\"><i class='fa fa-pencil fa-fw'></i></a> "+
+                        " <a href=\"crudFavoritos.php?id="+row.id+"&action=delete\"><i class='fa fa-minus-circle fa-fw'></i></a>";
                     }
                 },
                 rowCount: [-1, 25, 50, 75]

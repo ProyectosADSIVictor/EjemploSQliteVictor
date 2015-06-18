@@ -1,3 +1,6 @@
+<?php
+require_once "crudFavoritos.php"; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Editar - Favoritos</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -57,8 +60,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -73,8 +75,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -89,8 +90,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -149,46 +149,8 @@
                     </ul>
                 </li>
             </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
-                </ul>
-            </div>
+
+             <?php include_once "menu.php"; ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -200,19 +162,88 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Blank Page
-                            <small>Subheading</small>
+                            Editar Favoritos
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="index.html">Favoritos</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
+                                <i class="fa fa-edit"></i> Editar
                             </li>
                         </ol>
                     </div>
                 </div>
+                <!-- /.row -->
+
+                <?php if(empty($_GET['id'])){ ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> No se encontro un favorito al que aplicar esta accion.
+                    </div>
+                <?php }else{ ?>
+
+                <?php
+                    $_SESSION['idfavoritos'] = $_GET['id'];
+                    $arrfavorito = getfavoritos($_SESSION['idfavoritos']);
+                ?>
+                <div class="row">
+                    <div class="col-lg-8">
+
+                        <form role="form" id="frmUser" method="post" action="crudFavoritos.php?action=update">
+                            <div class="form-group">
+                                <label>Titulo</label>
+                                <input id="titulo" name="titulo" class="form-control" value="<?php echo $arrfavorito['titulo']; ?>" >
+                                <p class="help-block">Titulo del favorito.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Direccion</label>
+                                <input id="direccion" name="direccion" class="form-control" value="<?php echo $arrfavorito['direccion']; ?>" >
+                                <p class="help-block">URL del favorito.</p>
+                            </div>
+
+                             <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="categoria" name="categoria" class="form-control">
+                                    <option <?php echo ($arrfavorito['categoria'] == 'Tecnologia') ? "selected='true'" : "" ?>value="Tecnologia">Tecnologia</option>
+                                    <option <?php echo ($arrfavorito['categoria'] == 'Salud') ? "selected='true'" : "" ?>value="Salud">Salud</option>
+                                    <option <?php echo ($arrfavorito['categoria'] == 'Hobby') ? "selected='true'" : "" ?>value="Hobby">Hobby</option>
+                                    <option <?php echo ($arrfavorito['categoria'] == 'Personal') ? "selected='true'" : "" ?>value="Personal">Personal</option>
+                                    <option <?php echo ($arrfavorito['categoria'] == 'Trabajo') ? "selected='true'" : "" ?>value="Trabajo">Trabajo</option>
+                                   
+                                </select>
+                            </div>
+
+                             <div class="form-group">
+                                <label>Comentario</label>
+                                <input id="comentario" name="comentario" class="form-control" required value="<?php echo $arrfavorito['comentario']; ?>">
+                                <p class="help-block">Descripcion del favorito.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="valoracion" name="valoracion" class="form-control">
+                                    <option <?php echo ($arrfavorito['valoracion'] == '1') ? "selected='true'" : "" ?>value="1">1</option>
+                                    <option <?php echo ($arrfavorito['valoracion'] == '2') ? "selected='true'" : "" ?>value="2">2</option>
+                                    <option <?php echo ($arrfavorito['valoracion'] == '3') ? "selected='true'" : "" ?>value="3">3</option>
+                                    <option <?php echo ($arrfavorito['valoracion'] == '4') ? "selected='true'" : "" ?>value="4">4</option>
+                                    <option <?php echo ($arrfavorito['valoracion'] == '5') ? "selected='true'" : "" ?>value="5">5</option>
+                                   
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Guardar</button>
+                            <button type="reset" class="btn btn-default">Limpiar</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <?php } ?>
+
+
                 <!-- /.row -->
 
             </div>
