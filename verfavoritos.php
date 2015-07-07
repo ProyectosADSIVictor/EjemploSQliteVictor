@@ -182,7 +182,7 @@ require_once "crudUser.php";
                             <thead>
                                 <tr>
                                     <th data-column-id="id" data-align="left" data-width="40px" data-type="numeric" data-order="asc">ID</th>
-                                    <th data-column-id="titulo" data-width="25%" data-align="left" data-header-align="center">Titulo</th>
+                                    <th data-column-id="titulo" data-width="100px" data-align="left" data-header-align="center">Titulo</th>
                                     <th data-column-id="direccion" data-width="25%">Direccion</th>
                                     <th data-column-id="categoria" data-width="100px">Categoria</th>
                                     <th data-column-id="comentario" data-width="100px">Comentario</th>

@@ -162,7 +162,7 @@ session_start();
                 </div>
                 <!-- /.row -->
                 <?php 
-                $codigo = $_SESSION['permisos'];
+//                $codigo = $_SESSION['permisos'];
                 echo "Tu Usuario es: ".$_SESSION['usuario']."";
                 echo "<br>Tu Clave es: ".$_SESSION['contrasena']."<br><br>";
                 ?>

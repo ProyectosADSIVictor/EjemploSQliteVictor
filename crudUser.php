@@ -25,6 +25,7 @@
 			':email' => $_POST['email'],
 			':usuario' => $_POST['usuario'],
 			':contrasena' => $_POST['contrasena'],
+			
 		);
 	
 		/* Preparamos el query apartir del array $params*/
@@ -126,7 +127,7 @@
 		if ($result > 0){
 			header('Location: viewUsers.php?result=true');
 		}else{
-			header('Location: viewUser.php?result=false');
+			header('Location: viewUsers.php?result=false');
 		}
 	}
 ?>
